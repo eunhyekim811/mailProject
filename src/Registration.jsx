@@ -1,5 +1,6 @@
 import React, {useState, useRef, useEffect} from "react";
 import { Navigate, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './registration.css'
 
 export default function Registration(){
@@ -45,7 +46,7 @@ export default function Registration(){
     const handleBirth=(e)=>{
         const value = e.target.value;
         setBirth(value);
-        if(value.length==4){
+        if(value.length===6){
             setBirthValid(true);
         }else{
             setBirthValid(false);
@@ -54,7 +55,7 @@ export default function Registration(){
     const handleGender = (e) => {
         const value = e.target.value;
         setGender(value);
-        if(value.length==0 || value.length>2){
+        if(value.length===0 || value.length>2){
             setGenderValid(false);
         }else{
             setGenderValid(true);
@@ -63,8 +64,28 @@ export default function Registration(){
     }
 
     const onClickConfirmBt=async()=>{
-        console.log("Form submitted:", { name, email, birth, gender });
-        navigate('/success');
+        try{
+            const response=await axios.post('https://iyh24tc8ge.execute-api.ap-northeast-2.amazonaws.com/ccProject/userManage', {
+                Method: "POST", 
+                email: email, 
+                birth: parseInt(birth), 
+                gender: gender, 
+                name: name
+            }, 
+            {
+                headers: {
+                    "Content-Type": "application/json", // 헤더 설정
+                },
+            });
+            console.log("Form submitted:", { name, email, birth, gender });
+
+            if(response.status===200){
+                console.log("data inpus success");
+                navigate('/success');
+            }
+        } catch(error) {
+            console.error('Error adding data: ', error.response ? error.response.data : error.message);
+        }
     };
 
     useEffect(()=>{
