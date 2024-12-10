@@ -83,6 +83,9 @@ export default function Registration(){
                 console.log("data inpus success");
                 navigate('/success');
             }
+            else if(response.status===201){
+                alert('동일한 이메일이 존재합니다.')
+            }
         } catch(error) {
             console.error('Error adding data: ', error.response ? error.response.data : error.message);
         }
