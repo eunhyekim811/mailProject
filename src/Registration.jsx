@@ -46,7 +46,7 @@ export default function Registration(){
     const handleBirth=(e)=>{
         const value = e.target.value;
         setBirth(value);
-        if(value.length===6){
+        if(value.length===8){
             setBirthValid(true);
         }else{
             setBirthValid(false);
@@ -136,14 +136,14 @@ export default function Registration(){
                 <input 
                     type='number'
                     className='regInput'
-                    placeholder='태어난 연도'
+                    placeholder='태어난 연도 (ex.19370708)'
                     value={birth}
                     onChange={handleBirth}/>
             </div>
             <div className='regErrorMessageWrap'>
                     {
                     !birthValid && birth.length>0 &&(
-                            <div>태어난 연도를 입력해주세요</div>
+                            <div>태어난 연도, 월, 일을 입력해주세요</div>
                         )
                     }
                 </div>

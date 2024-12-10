@@ -9,7 +9,7 @@ export default function Success(){
         <div className='successPage'>
             <div className='successWrap'>
                 <div class='successTitleWrap'>등록 성공</div>
-                <div class='subTitleWrap'>환영합니다!</div>
+                <div class='subTitleWrap'>건강검진 항목에 대해 이메일로 알려드립니다!</div>
             </div>
         </div>
     );
